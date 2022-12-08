@@ -31,3 +31,14 @@ resource "aws_route_table_association" "bastion_route_associate" {
   subnet_id      = each.value
   route_table_id = aws_route_table.route_table_gw.id
 }
+
+# resource "aws_route_table_association" "Nat_route_associate" {
+#   subnet_id      = aws_subnet.subnet_block["1"].id
+#   route_table_id = aws_route_table.route_table_gw.id
+# }
+
+resource "aws_route_table_association" "Vm_route_associate" {
+  for_each       = local.vm_subnets
+  subnet_id      = each.value
+  route_table_id = aws_route_table.route_table_nat.id
+}
