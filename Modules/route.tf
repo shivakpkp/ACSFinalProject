@@ -23,3 +23,11 @@ resource "aws_route_table" "route_table_nat" {
   }
 
 }
+
+####Association###
+
+resource "aws_route_table_association" "bastion_route_associate" {
+  for_each       = local.gw_subnets
+  subnet_id      = each.value
+  route_table_id = aws_route_table.route_table_gw.id
+}
