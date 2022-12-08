@@ -13,3 +13,13 @@ resource "aws_route_table" "route_table_gw" {
   }
 
 }
+
+resource "aws_route_table" "route_table_nat" {
+  vpc_id = aws_vpc.aws_vpc_name.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.nat_gateway.id
+  }
+
+}
